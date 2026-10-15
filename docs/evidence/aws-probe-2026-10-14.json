@@ -1,0 +1,79 @@
+{
+  "stackName": "accord-probe-02ac0b77e899",
+  "region": "us-east-1",
+  "steps": [
+    {
+      "step": "create",
+      "timeUtc": "2026-10-14T13:16:23Z",
+      "checks": {
+        "stackCreated": true
+      }
+    },
+    {
+      "step": "test",
+      "timeUtc": "2026-10-14T13:42:14Z",
+      "checks": {
+        "revision": "1",
+        "unauthenticatedRejected": true,
+        "cognitoTokenIssued": true,
+        "authenticatedApi": true,
+        "atomicConditionalTransaction": true,
+        "duplicateRejected": true,
+        "versionedFileRoundTrip": true,
+        "deleteMarker": true,
+        "anonymousFileRejected": true,
+        "queueWorker": true,
+        "logWritesAndRetention": true,
+        "browserLogin": "not tested",
+        "bedrock": "not tested"
+      }
+    },
+    {
+      "step": "update",
+      "timeUtc": "2026-10-14T13:43:54Z",
+      "checks": {
+        "stackUpdated": true,
+        "revision": "2",
+        "runtimeVerification": "run test next"
+      }
+    },
+    {
+      "step": "test",
+      "timeUtc": "2026-10-14T13:46:02Z",
+      "checks": {
+        "revision": "2",
+        "unauthenticatedRejected": true,
+        "cognitoTokenIssued": true,
+        "authenticatedApi": true,
+        "atomicConditionalTransaction": true,
+        "duplicateRejected": true,
+        "versionedFileRoundTrip": true,
+        "deleteMarker": true,
+        "anonymousFileRejected": true,
+        "queueWorker": true,
+        "logWritesAndRetention": true,
+        "browserLogin": "not tested",
+        "bedrock": "not tested"
+      }
+    },
+    {
+      "step": "test-dlq",
+      "timeUtc": "2026-10-14T14:20:10Z",
+      "checks": {
+        "failedMessageReachedDlq": true,
+        "dlqMessageRemoved": true
+      }
+    },
+    {
+      "step": "cleanup",
+      "timeUtc": "2026-10-14T14:32:32Z",
+      "checks": {
+        "stackDeleted": true,
+        "allStackResourcesDeleteComplete": true,
+        "bucketAbsent": true,
+        "logGroupAbsent": true,
+        "billingReconciliation": "pending user balance check"
+      }
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "name": "accord",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.21.0 <27"
+  },
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "dev:api": "tsx watch apps/api/src/server.ts",
+    "dev:web": "vite --config apps/web/vite.config.ts",
+    "dev:cloud": "vite --config apps/cloud-web/vite.config.ts",
+    "seed": "node --import tsx apps/api/src/seed.ts",
+    "test": "tsx --test apps/api/test/*.test.ts apps/cloud-web/test/*.test.ts",
+    "test:cloud": "python3 -m unittest discover -s apps/cloud-api -p 'test_*.py' -v && python3 -m unittest discover -s scripts/aws-cloud -p 'test_*.py' -v",
+    "package:cloud": "python3 scripts/aws-cloud/package.py",
+    "typecheck": "tsc --noEmit",
+    "build": "npm run typecheck && vite build --config apps/web/vite.config.ts && vite build --config apps/cloud-web/vite.config.ts",
+    "check": "npm run test && npm run test:cloud && npm run build",
+    "eval:validate": "node --import tsx packages/evaluation/src/cli.ts validate",
+    "eval:fixture": "node --import tsx packages/evaluation/src/cli.ts fixture",
+    "eval:score": "node --import tsx packages/evaluation/src/cli.ts score",
+    "eval:review": "node --import tsx packages/evaluation/src/cli.ts review-template",
+    "eval:inputs": "node --import tsx packages/evaluation/src/cli.ts inputs"
+  },
+  "dependencies": {
+    "express": "5.3.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "zod": "4.6.5"
+  },
+  "devDependencies": {
+    "@types/express": "5.0.6",
+    "@types/node": "24.19.2",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "6.1.2",
+    "tsx": "4.23.15",
+    "typescript": "7.0.2",
+    "vite": "8.3.4"
+  }
+}

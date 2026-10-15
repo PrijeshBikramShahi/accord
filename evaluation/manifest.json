@@ -1,0 +1,10 @@
+{
+  "version": "accord-synthetic-v1",
+  "frozenOn": "2026-10-12",
+  "annotationStatus": "Agent-authored, single-annotator synthetic gold; human review pending.",
+  "limitations": "Structural freeze before live prompt tuning. Not production evidence or independent annotation.",
+  "files": {
+    "cases/development.json": "29ba14ccfdef80301979b6962c60675ae96168c34b86d0788a12905e33cb69ae",
+    "cases/holdout.json": "2aabf63d0f5849b1dbac432755dd0e4a9bcf754112125562bea3f1a2e3bd2c0a"
+  }
+}

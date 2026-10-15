@@ -1,0 +1,15 @@
+node_modules/
+dist/
+.local/
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+__pycache__/
+scripts/aws-probe/.probe*
+scripts/aws-probe/probe-results.json
+scripts/aws-cloud/.cloud*
+scripts/aws-cloud/demo-accounts.json
+scripts/aws-cloud/cloud-config.json
+apps/cloud-web/public/cloud-config.json

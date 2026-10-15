@@ -1,0 +1,462 @@
+{
+  "schemaVersion": 1,
+  "runId": "d79e0c94-d683-4bf4-abd3-c52b1be3d99b",
+  "mode": "fixture",
+  "split": "development",
+  "datasetHash": "72fcde0cceb29f509426441a6129f446c899925ed8116dc40e7476635a0e9c23",
+  "configuration": {
+    "provider": "fixture",
+    "model": "atlas-demo-v1",
+    "promptHash": "19c13c3bf62ce40b77b427f6a13e691f0216cd0d4fb8ce0208e5bbd4e59e3227",
+    "resultSchemaVersion": "scope-result-v1"
+  },
+  "evidenceLabel": "Fixture contract exercise only; not model-quality evidence.",
+  "classification": {
+    "macroF1": 0.12345679012345678,
+    "perClass": {
+      "likely_included": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 8,
+        "precision": 0,
+        "recall": 0,
+        "f1": 0
+      },
+      "possible_scope_addition": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 8,
+        "precision": 0,
+        "recall": 0,
+        "f1": 0
+      },
+      "unclear": {
+        "tp": 5,
+        "fp": 15,
+        "fn": 2,
+        "precision": 0.25,
+        "recall": 0.7142857142857143,
+        "f1": 0.37037037037037035
+      }
+    },
+    "confusionMatrix": {
+      "likely_included": {
+        "likely_included": 0,
+        "possible_scope_addition": 0,
+        "unclear": 6,
+        "missing": 2
+      },
+      "possible_scope_addition": {
+        "likely_included": 0,
+        "possible_scope_addition": 0,
+        "unclear": 6,
+        "missing": 2
+      },
+      "unclear": {
+        "likely_included": 0,
+        "possible_scope_addition": 0,
+        "unclear": 5,
+        "missing": 2
+      }
+    },
+    "expectedItems": 23,
+    "matchedItems": 17,
+    "missedItems": 6,
+    "unmatchedFindings": 3,
+    "coverage": 0.7391304347826086
+  },
+  "citations": {
+    "valid": 20,
+    "presented": 20,
+    "validity": 1,
+    "semanticSupportIsManual": true
+  },
+  "clarification": {
+    "required": 14,
+    "truePositives": 11,
+    "falsePositives": 9,
+    "precision": 0.55,
+    "recall": 0.7857142857142857,
+    "unnecessaryRate": 0.6666666666666666,
+    "questionRelevanceNotAutomaticallyScored": true
+  },
+  "reliability": {
+    "expectedCases": 20,
+    "validCases": 20,
+    "invalidResults": 0,
+    "terminalFailures": 0,
+    "missingResults": 0,
+    "invalidResultRate": 0,
+    "terminalFailureRate": 0
+  },
+  "manual": {
+    "reviewedCases": 0,
+    "complete": false,
+    "supportedClaims": 0,
+    "evaluatedClaims": 0,
+    "semanticSupport": null,
+    "inventedCommitmentsObserved": null
+  },
+  "latencyMs": {
+    "modelAttempts": {
+      "samples": 20,
+      "median": 0.018937000000008197,
+      "p95": 0.046750000000002956
+    },
+    "queuedToComplete": {
+      "samples": 0,
+      "median": null,
+      "p95": null
+    },
+    "coldStarts": 0,
+    "unknownColdStarts": 20
+  },
+  "cost": {
+    "attempts": 20,
+    "uncertainAttempts": 0,
+    "measuredAttempts": 20,
+    "knownTotalUsd": 0,
+    "complete": true,
+    "meanUsdPerValidAnalysisIncludingFailuresAndRetries": 0
+  },
+  "targets": {
+    "classification": false,
+    "citationValidity": true,
+    "semanticSupport": null,
+    "noInventedCommitments": null,
+    "clarificationRecall": false,
+    "liveGate": "Not established by this offline scorer."
+  },
+  "cases": [
+    {
+      "caseId": "development-01",
+      "error": null,
+      "items": [
+        {
+          "itemId": "item-1",
+          "expected": "likely_included",
+          "findingId": "clarify",
+          "predicted": "unclear",
+          "clarificationExpected": false,
+          "clarificationPresent": true
+        }
+      ],
+      "unmatchedFindings": []
+    },
+    {
+      "caseId": "development-02",
+      "error": null,
+      "items": [
+        {
+          "itemId": "item-1",
+          "expected": "likely_included",
+          "findingId": "clarify",
+          "predicted": "unclear",
+          "clarificationExpected": false,
+          "clarificationPresent": true
+        }
+      ],
+      "unmatchedFindings": []
+    },
+    {
+      "caseId": "development-03",
+      "error": null,
+      "items": [
+        {
+          "itemId": "item-1",
+          "expected": "likely_included",
+          "findingId": "clarify",
+          "predicted": "unclear",
+          "clarificationExpected": false,
+          "clarificationPresent": true
+        }
+      ],
+      "unmatchedFindings": []
+    },
+    {
+      "caseId": "development-04",
+      "error": null,
+      "items": [
+        {
+          "itemId": "item-1",
+          "expected": "likely_included",
+          "findingId": "clarify",
+          "predicted": "unclear",
+          "clarificationExpected": false,
+          "clarificationPresent": true
+        }
+      ],
+      "unmatchedFindings": []
+    },
+    {
+      "caseId": "development-05",
+      "error": null,
+      "items": [
+        {
+          "itemId": "item-1",
+          "expected": "likely_included",
+          "findingId": null,
+          "predicted": "missing",
+          "clarificationExpected": false,
+          "clarificationPresent": false
+        },
+        {
+          "itemId": "item-2",
+          "expected": "possible_scope_addition",
+          "findingId": null,
+          "predicted": "missing",
+          "clarificationExpected": false,
+          "clarificationPresent": false
+        }
+      ],
+      "unmatchedFindings": [
+        "clarify"
+      ]
+    },
+    {
+      "caseId": "development-06",
+      "error": null,
+      "items": [
+        {
+          "itemId": "item-1",
+          "expected": "likely_included",
+          "findingId": "clarify",
+          "predicted": "unclear",
+          "clarificationExpected": false,
+          "clarificationPresent": true
+        }
+      ],
+      "unmatchedFindings": []
+    },
+    {
+      "caseId": "development-07",
+      "error": null,
+      "items": [
+        {
+          "itemId": "item-1",
+          "expected": "likely_included",
+          "findingId": "clarify",
+          "predicted": "unclear",
+          "clarificationExpected": false,
+          "clarificationPresent": true
+        }
+      ],
+      "unmatchedFindings": []
+    },
+    {
+      "caseId": "development-08",
+      "error": null,
+      "items": [
+        {
+          "itemId": "item-1",
+          "expected": "possible_scope_addition",
+          "findingId": "clarify",
+          "predicted": "unclear",
+          "clarificationExpected": true,
+          "clarificationPresent": true
+        }
+      ],
+      "unmatchedFindings": []
+    },
+    {
+      "caseId": "development-09",
+      "error": null,
+      "items": [
+        {
+          "itemId": "item-1",
+          "expected": "possible_scope_addition",
+          "findingId": "clarify",
+          "predicted": "unclear",
+          "clarificationExpected": true,
+          "clarificationPresent": true
+        }
+      ],
+      "unmatchedFindings": []
+    },
+    {
+      "caseId": "development-10",
+      "error": null,
+      "items": [
+        {
+          "itemId": "item-1",
+          "expected": "possible_scope_addition",
+          "findingId": "clarify",
+          "predicted": "unclear",
+          "clarificationExpected": true,
+          "clarificationPresent": true
+        }
+      ],
+      "unmatchedFindings": []
+    },
+    {
+      "caseId": "development-11",
+      "error": null,
+      "items": [
+        {
+          "itemId": "item-1",
+          "expected": "possible_scope_addition",
+          "findingId": "clarify",
+          "predicted": "unclear",
+          "clarificationExpected": true,
+          "clarificationPresent": true
+        }
+      ],
+      "unmatchedFindings": []
+    },
+    {
+      "caseId": "development-12",
+      "error": null,
+      "items": [
+        {
+          "itemId": "item-1",
+          "expected": "possible_scope_addition",
+          "findingId": null,
+          "predicted": "missing",
+          "clarificationExpected": true,
+          "clarificationPresent": false
+        },
+        {
+          "itemId": "item-2",
+          "expected": "likely_included",
+          "findingId": null,
+          "predicted": "missing",
+          "clarificationExpected": false,
+          "clarificationPresent": false
+        }
+      ],
+      "unmatchedFindings": [
+        "clarify"
+      ]
+    },
+    {
+      "caseId": "development-13",
+      "error": null,
+      "items": [
+        {
+          "itemId": "item-1",
+          "expected": "possible_scope_addition",
+          "findingId": "clarify",
+          "predicted": "unclear",
+          "clarificationExpected": true,
+          "clarificationPresent": true
+        }
+      ],
+      "unmatchedFindings": []
+    },
+    {
+      "caseId": "development-14",
+      "error": null,
+      "items": [
+        {
+          "itemId": "item-1",
+          "expected": "possible_scope_addition",
+          "findingId": "clarify",
+          "predicted": "unclear",
+          "clarificationExpected": true,
+          "clarificationPresent": true
+        }
+      ],
+      "unmatchedFindings": []
+    },
+    {
+      "caseId": "development-15",
+      "error": null,
+      "items": [
+        {
+          "itemId": "item-1",
+          "expected": "unclear",
+          "findingId": "clarify",
+          "predicted": "unclear",
+          "clarificationExpected": true,
+          "clarificationPresent": true
+        }
+      ],
+      "unmatchedFindings": []
+    },
+    {
+      "caseId": "development-16",
+      "error": null,
+      "items": [
+        {
+          "itemId": "item-1",
+          "expected": "unclear",
+          "findingId": "clarify",
+          "predicted": "unclear",
+          "clarificationExpected": true,
+          "clarificationPresent": true
+        }
+      ],
+      "unmatchedFindings": []
+    },
+    {
+      "caseId": "development-17",
+      "error": null,
+      "items": [
+        {
+          "itemId": "item-1",
+          "expected": "unclear",
+          "findingId": "clarify",
+          "predicted": "unclear",
+          "clarificationExpected": true,
+          "clarificationPresent": true
+        }
+      ],
+      "unmatchedFindings": []
+    },
+    {
+      "caseId": "development-18",
+      "error": null,
+      "items": [
+        {
+          "itemId": "item-1",
+          "expected": "unclear",
+          "findingId": "clarify",
+          "predicted": "unclear",
+          "clarificationExpected": true,
+          "clarificationPresent": true
+        }
+      ],
+      "unmatchedFindings": []
+    },
+    {
+      "caseId": "development-19",
+      "error": null,
+      "items": [
+        {
+          "itemId": "item-1",
+          "expected": "unclear",
+          "findingId": "clarify",
+          "predicted": "unclear",
+          "clarificationExpected": true,
+          "clarificationPresent": true
+        }
+      ],
+      "unmatchedFindings": []
+    },
+    {
+      "caseId": "development-20",
+      "error": null,
+      "items": [
+        {
+          "itemId": "item-1",
+          "expected": "unclear",
+          "findingId": null,
+          "predicted": "missing",
+          "clarificationExpected": true,
+          "clarificationPresent": false
+        },
+        {
+          "itemId": "item-2",
+          "expected": "unclear",
+          "findingId": null,
+          "predicted": "missing",
+          "clarificationExpected": true,
+          "clarificationPresent": false
+        }
+      ],
+      "unmatchedFindings": [
+        "clarify"
+      ]
+    }
+  ]
+}

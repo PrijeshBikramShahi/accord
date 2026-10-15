@@ -1,0 +1,364 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "Disposable Accord synthetic feasibility probe. No Bedrock or IAM resources.",
+  "Parameters": {
+    "LabRoleArn": {
+      "Type": "String",
+      "AllowedPattern": "arn:aws:iam::[0-9]{12}:role/LabRole"
+    },
+    "Revision": {
+      "Type": "String",
+      "AllowedValues": [
+        "1",
+        "2"
+      ],
+      "Default": "1"
+    }
+  },
+  "Resources": {
+    "Table": {
+      "Type": "AWS::DynamoDB::Table",
+      "Properties": {
+        "BillingMode": "PAY_PER_REQUEST",
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "pk",
+            "AttributeType": "S"
+          }
+        ],
+        "KeySchema": [
+          {
+            "AttributeName": "pk",
+            "KeyType": "HASH"
+          }
+        ]
+      }
+    },
+    "Bucket": {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+        "VersioningConfiguration": {
+          "Status": "Enabled"
+        },
+        "PublicAccessBlockConfiguration": {
+          "BlockPublicAcls": true,
+          "IgnorePublicAcls": true,
+          "BlockPublicPolicy": true,
+          "RestrictPublicBuckets": true
+        },
+        "OwnershipControls": {
+          "Rules": [
+            {
+              "ObjectOwnership": "BucketOwnerEnforced"
+            }
+          ]
+        },
+        "BucketEncryption": {
+          "ServerSideEncryptionConfiguration": [
+            {
+              "ServerSideEncryptionByDefault": {
+                "SSEAlgorithm": "AES256"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "DeadLetterQueue": {
+      "Type": "AWS::SQS::Queue",
+      "Properties": {
+        "MessageRetentionPeriod": 86400,
+        "SqsManagedSseEnabled": true
+      }
+    },
+    "Queue": {
+      "Type": "AWS::SQS::Queue",
+      "Properties": {
+        "VisibilityTimeout": 90,
+        "MessageRetentionPeriod": 86400,
+        "SqsManagedSseEnabled": true,
+        "RedrivePolicy": {
+          "deadLetterTargetArn": {
+            "Fn::GetAtt": [
+              "DeadLetterQueue",
+              "Arn"
+            ]
+          },
+          "maxReceiveCount": 2
+        }
+      }
+    },
+    "LogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": {
+          "Fn::Sub": "/aws/lambda/${AWS::StackName}"
+        },
+        "RetentionInDays": 1
+      }
+    },
+    "Function": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "AWS::StackName"
+        },
+        "Runtime": "python3.13",
+        "Handler": "index.handler",
+        "Role": {
+          "Ref": "LabRoleArn"
+        },
+        "Timeout": 15,
+        "MemorySize": 128,
+        "Code": {
+          "ZipFile": "\"\"\"Synthetic probe only. No user documents, model calls or production endpoints.\"\"\"\nimport json\nimport os\nimport re\nimport uuid\n\nimport boto3\nfrom botocore.config import Config\nfrom botocore.exceptions import ClientError\n\nCONFIG = Config(connect_timeout=2, read_timeout=3, retries={\"max_attempts\": 1, \"mode\": \"standard\"})\n\n\ndef client(service):\n    return boto3.client(service, config=CONFIG)\n\n\ndef response(code, body):\n    return {\"statusCode\": code, \"headers\": {\"content-type\": \"application/json\", \"cache-control\": \"no-store\"}, \"body\": json.dumps(body)}\n\n\ndef handler(event, context):\n    table = os.environ[\"TABLE\"]\n    dynamo = client(\"dynamodb\")\n    if \"Records\" in event:\n        for record in event[\"Records\"]:\n            body = json.loads(record[\"body\"])\n            if not re.fullmatch(r\"[a-f0-9]{32}\", body.get(\"id\", \"\")):\n                raise ValueError(\"Invalid synthetic probe ID\")\n            if body.get(\"kind\") == \"poison\":\n                raise ValueError(\"Intentional synthetic DLQ probe\")\n            try:\n                dynamo.put_item(TableName=table, Item={\"pk\": {\"S\": \"queue#\" + body[\"id\"]}}, ConditionExpression=\"attribute_not_exists(pk)\")\n            except ClientError as error:\n                if error.response[\"Error\"][\"Code\"] != \"ConditionalCheckFailedException\":\n                    raise\n            print(json.dumps({\"event\": \"queue_processed\", \"probeId\": body[\"id\"]}))\n        return {\"ok\": True}\n\n    # The HTTP route requires the API Gateway JWT authorizer. Reject invocations\n    # that lack its claims as an additional guard; claims are not logged.\n    claims = event.get(\"requestContext\", {}).get(\"authorizer\", {}).get(\"jwt\", {}).get(\"claims\", {})\n    if not claims.get(\"sub\"):\n        return response(401, {\"error\": \"Authentication required\"})\n    if event.get(\"requestContext\", {}).get(\"http\", {}).get(\"method\") == \"GET\":\n        return response(200, {\"ok\": True, \"revision\": os.environ[\"REVISION\"]})\n    try:\n        probe_id = uuid.uuid4().hex\n        transaction = [{\"Put\": {\"TableName\": table, \"Item\": {\"pk\": {\"S\": prefix + probe_id}}, \"ConditionExpression\": \"attribute_not_exists(pk)\"}} for prefix in (\"decision#\", \"task#\")]\n        dynamo.transact_write_items(TransactItems=transaction)\n        try:\n            dynamo.transact_write_items(TransactItems=transaction)\n            raise RuntimeError(\"Duplicate transaction unexpectedly accepted\")\n        except ClientError as error:\n            reasons = error.response.get(\"CancellationReasons\", [])\n            if error.response[\"Error\"][\"Code\"] != \"TransactionCanceledException\" or not any(r.get(\"Code\") == \"ConditionalCheckFailed\" for r in reasons):\n                raise\n        bucket = os.environ[\"BUCKET\"]\n        s3 = client(\"s3\")\n        key = \"synthetic/\" + probe_id + \".txt\"\n        old = s3.put_object(Bucket=bucket, Key=key, Body=b\"Accord synthetic version one\\n\", ContentType=\"text/plain\")\n        new = s3.put_object(Bucket=bucket, Key=key, Body=b\"Accord synthetic version two\\n\", ContentType=\"text/plain\")\n        if not old.get(\"VersionId\") or old[\"VersionId\"] == \"null\" or old[\"VersionId\"] == new.get(\"VersionId\"):\n            raise RuntimeError(\"Object versioning was not established\")\n        previous = s3.get_object(Bucket=bucket, Key=key, VersionId=old[\"VersionId\"])[\"Body\"].read()\n        latest = s3.get_object(Bucket=bucket, Key=key)[\"Body\"].read()\n        if previous != b\"Accord synthetic version one\\n\" or latest != b\"Accord synthetic version two\\n\":\n            raise RuntimeError(\"Object versions did not round-trip\")\n        # Create a delete marker, while retaining explicit access to old versions.\n        marker = s3.delete_object(Bucket=bucket, Key=key)\n        if not marker.get(\"DeleteMarker\"):\n            raise RuntimeError(\"Expected a versioned delete marker\")\n        client(\"sqs\").send_message(QueueUrl=os.environ[\"QUEUE\"], MessageBody=json.dumps({\"id\": probe_id, \"kind\": \"normal\"}))\n        print(json.dumps({\"event\": \"probe_completed\", \"probeId\": probe_id}))\n        return response(200, {\"ok\": True, \"id\": probe_id, \"key\": key, \"version\": old[\"VersionId\"], \"revision\": os.environ[\"REVISION\"], \"checks\": [\"conditional_transaction\", \"duplicate_rejected\", \"versioned_objects\", \"delete_marker\", \"queue_sent\"]})\n    except ClientError as error:\n        code = error.response[\"Error\"][\"Code\"]\n        print(json.dumps({\"event\": \"probe_failed\", \"code\": code}))\n        return response(500, {\"error\": code})\n    except Exception:\n        print(json.dumps({\"event\": \"probe_failed\", \"code\": \"ProbeAssertionFailed\"}))\n        return response(500, {\"error\": \"ProbeAssertionFailed\"})\n"
+        },
+        "Environment": {
+          "Variables": {
+            "TABLE": {
+              "Ref": "Table"
+            },
+            "BUCKET": {
+              "Ref": "Bucket"
+            },
+            "QUEUE": {
+              "Ref": "Queue"
+            },
+            "REVISION": {
+              "Ref": "Revision"
+            }
+          }
+        }
+      },
+      "DependsOn": "LogGroup"
+    },
+    "QueueMapping": {
+      "Type": "AWS::Lambda::EventSourceMapping",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "Function"
+        },
+        "EventSourceArn": {
+          "Fn::GetAtt": [
+            "Queue",
+            "Arn"
+          ]
+        },
+        "BatchSize": 1,
+        "MaximumBatchingWindowInSeconds": 0,
+        "Enabled": true,
+        "ScalingConfig": {
+          "MaximumConcurrency": 2
+        }
+      }
+    },
+    "UserPool": {
+      "Type": "AWS::Cognito::UserPool",
+      "Properties": {
+        "AdminCreateUserConfig": {
+          "AllowAdminCreateUserOnly": true
+        },
+        "Policies": {
+          "PasswordPolicy": {
+            "MinimumLength": 16,
+            "RequireLowercase": true,
+            "RequireUppercase": true,
+            "RequireNumbers": true,
+            "RequireSymbols": true
+          }
+        },
+        "UserPoolTags": {
+          "Purpose": "accord-feasibility-probe"
+        }
+      }
+    },
+    "UserPoolClient": {
+      "Type": "AWS::Cognito::UserPoolClient",
+      "Properties": {
+        "UserPoolId": {
+          "Ref": "UserPool"
+        },
+        "GenerateSecret": false,
+        "ExplicitAuthFlows": [
+          "ALLOW_ADMIN_USER_PASSWORD_AUTH",
+          "ALLOW_REFRESH_TOKEN_AUTH"
+        ],
+        "PreventUserExistenceErrors": "ENABLED",
+        "AccessTokenValidity": 5,
+        "IdTokenValidity": 5,
+        "RefreshTokenValidity": 1,
+        "TokenValidityUnits": {
+          "AccessToken": "minutes",
+          "IdToken": "minutes",
+          "RefreshToken": "days"
+        }
+      }
+    },
+    "Api": {
+      "Type": "AWS::ApiGatewayV2::Api",
+      "Properties": {
+        "Name": {
+          "Ref": "AWS::StackName"
+        },
+        "ProtocolType": "HTTP"
+      }
+    },
+    "Authorizer": {
+      "Type": "AWS::ApiGatewayV2::Authorizer",
+      "Properties": {
+        "ApiId": {
+          "Ref": "Api"
+        },
+        "Name": "Cognito",
+        "AuthorizerType": "JWT",
+        "IdentitySource": [
+          "$request.header.Authorization"
+        ],
+        "JwtConfiguration": {
+          "Audience": [
+            {
+              "Ref": "UserPoolClient"
+            }
+          ],
+          "Issuer": {
+            "Fn::Sub": "https://cognito-idp.${AWS::Region}.amazonaws.com/${UserPool}"
+          }
+        }
+      }
+    },
+    "Integration": {
+      "Type": "AWS::ApiGatewayV2::Integration",
+      "Properties": {
+        "ApiId": {
+          "Ref": "Api"
+        },
+        "IntegrationType": "AWS_PROXY",
+        "IntegrationUri": {
+          "Fn::GetAtt": [
+            "Function",
+            "Arn"
+          ]
+        },
+        "PayloadFormatVersion": "2.0",
+        "TimeoutInMillis": 20000
+      }
+    },
+    "GETRoute": {
+      "Type": "AWS::ApiGatewayV2::Route",
+      "Properties": {
+        "ApiId": {
+          "Ref": "Api"
+        },
+        "RouteKey": "GET /probe",
+        "Target": {
+          "Fn::Sub": "integrations/${Integration}"
+        },
+        "AuthorizationType": "JWT",
+        "AuthorizerId": {
+          "Ref": "Authorizer"
+        }
+      }
+    },
+    "POSTRoute": {
+      "Type": "AWS::ApiGatewayV2::Route",
+      "Properties": {
+        "ApiId": {
+          "Ref": "Api"
+        },
+        "RouteKey": "POST /probe",
+        "Target": {
+          "Fn::Sub": "integrations/${Integration}"
+        },
+        "AuthorizationType": "JWT",
+        "AuthorizerId": {
+          "Ref": "Authorizer"
+        }
+      }
+    },
+    "Stage": {
+      "Type": "AWS::ApiGatewayV2::Stage",
+      "Properties": {
+        "ApiId": {
+          "Ref": "Api"
+        },
+        "StageName": "$default",
+        "AutoDeploy": true,
+        "DefaultRouteSettings": {
+          "ThrottlingBurstLimit": 2,
+          "ThrottlingRateLimit": 1.0
+        }
+      }
+    },
+    "ApiPermission": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "Function"
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Sub": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${Api}/*/*/probe"
+        },
+        "SourceAccount": {
+          "Ref": "AWS::AccountId"
+        }
+      }
+    }
+  },
+  "Outputs": {
+    "Table": {
+      "Value": {
+        "Ref": "Table"
+      }
+    },
+    "Bucket": {
+      "Value": {
+        "Ref": "Bucket"
+      }
+    },
+    "Queue": {
+      "Value": {
+        "Ref": "Queue"
+      }
+    },
+    "DeadLetterQueue": {
+      "Value": {
+        "Ref": "DeadLetterQueue"
+      }
+    },
+    "UserPool": {
+      "Value": {
+        "Ref": "UserPool"
+      }
+    },
+    "UserPoolClient": {
+      "Value": {
+        "Ref": "UserPoolClient"
+      }
+    },
+    "Function": {
+      "Value": {
+        "Ref": "Function"
+      }
+    },
+    "LogGroup": {
+      "Value": {
+        "Ref": "LogGroup"
+      }
+    },
+    "QueueMapping": {
+      "Value": {
+        "Ref": "QueueMapping"
+      }
+    },
+    "Endpoint": {
+      "Value": {
+        "Fn::GetAtt": [
+          "Api",
+          "ApiEndpoint"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,736 @@
+{
+  "schemaVersion": 1,
+  "runId": "d79e0c94-d683-4bf4-abd3-c52b1be3d99b",
+  "mode": "fixture",
+  "split": "development",
+  "datasetHash": "72fcde0cceb29f509426441a6129f446c899925ed8116dc40e7476635a0e9c23",
+  "createdAt": "2026-10-12T15:19:15.086Z",
+  "configuration": {
+    "provider": "fixture",
+    "model": "atlas-demo-v1",
+    "promptHash": "19c13c3bf62ce40b77b427f6a13e691f0216cd0d4fb8ce0208e5bbd4e59e3227",
+    "resultSchemaVersion": "scope-result-v1"
+  },
+  "records": [
+    {
+      "caseId": "development-01",
+      "status": "succeeded",
+      "output": {
+        "findings": [
+          {
+            "id": "clarify",
+            "feedbackId": "feedback",
+            "requestSpan": "Correct the spelling of croissant.",
+            "label": "unclear",
+            "rationale": "This request is outside the exact scripted Atlas fixture. No model has assessed its scope coverage or separated its requested items.",
+            "citations": [
+              {
+                "sourceId": "feedback",
+                "version": 1,
+                "paragraphId": "p-1",
+                "quote": "Correct the spelling of croissant."
+              }
+            ],
+            "missingInformation": [
+              "Which individual changes are requested, and which approved provisions authorize each one?"
+            ],
+            "proposedAction": "Review the frozen evidence manually and draft a clarification if needed."
+          }
+        ]
+      },
+      "attempts": [
+        {
+          "modelMs": 0.3155830000000037,
+          "costUsd": 0,
+          "outcome": "succeeded"
+        }
+      ],
+      "queuedToCompleteMs": null,
+      "coldStart": null
+    },
+    {
+      "caseId": "development-02",
+      "status": "succeeded",
+      "output": {
+        "findings": [
+          {
+            "id": "clarify",
+            "feedbackId": "feedback",
+            "requestSpan": "Make the exhibit headings readable in the high-contrast theme.",
+            "label": "unclear",
+            "rationale": "This request is outside the exact scripted Atlas fixture. No model has assessed its scope coverage or separated its requested items.",
+            "citations": [
+              {
+                "sourceId": "feedback",
+                "version": 1,
+                "paragraphId": "p-1",
+                "quote": "Make the exhibit headings readable in the high-contrast theme."
+              }
+            ],
+            "missingInformation": [
+              "Which individual changes are requested, and which approved provisions authorize each one?"
+            ],
+            "proposedAction": "Review the frozen evidence manually and draft a clarification if needed."
+          }
+        ]
+      },
+      "attempts": [
+        {
+          "modelMs": 0.034250000000014325,
+          "costUsd": 0,
+          "outcome": "succeeded"
+        }
+      ],
+      "queuedToCompleteMs": null,
+      "coldStart": null
+    },
+    {
+      "caseId": "development-03",
+      "status": "succeeded",
+      "output": {
+        "findings": [
+          {
+            "id": "clarify",
+            "feedbackId": "feedback",
+            "requestSpan": "Add the approved transcript download link.",
+            "label": "unclear",
+            "rationale": "This request is outside the exact scripted Atlas fixture. No model has assessed its scope coverage or separated its requested items.",
+            "citations": [
+              {
+                "sourceId": "feedback",
+                "version": 1,
+                "paragraphId": "p-1",
+                "quote": "Add the approved transcript download link."
+              }
+            ],
+            "missingInformation": [
+              "Which individual changes are requested, and which approved provisions authorize each one?"
+            ],
+            "proposedAction": "Review the frozen evidence manually and draft a clarification if needed."
+          }
+        ]
+      },
+      "attempts": [
+        {
+          "modelMs": 0.03358300000002146,
+          "costUsd": 0,
+          "outcome": "succeeded"
+        }
+      ],
+      "queuedToCompleteMs": null,
+      "coldStart": null
+    },
+    {
+      "caseId": "development-04",
+      "status": "succeeded",
+      "output": {
+        "findings": [
+          {
+            "id": "clarify",
+            "feedbackId": "feedback",
+            "requestSpan": "Allow visitors to filter the directory by city.",
+            "label": "unclear",
+            "rationale": "This request is outside the exact scripted Atlas fixture. No model has assessed its scope coverage or separated its requested items.",
+            "citations": [
+              {
+                "sourceId": "feedback",
+                "version": 1,
+                "paragraphId": "p-1",
+                "quote": "Allow visitors to filter the directory by city."
+              }
+            ],
+            "missingInformation": [
+              "Which individual changes are requested, and which approved provisions authorize each one?"
+            ],
+            "proposedAction": "Review the frozen evidence manually and draft a clarification if needed."
+          }
+        ]
+      },
+      "attempts": [
+        {
+          "modelMs": 0.024124999999997954,
+          "costUsd": 0,
+          "outcome": "succeeded"
+        }
+      ],
+      "queuedToCompleteMs": null,
+      "coldStart": null
+    },
+    {
+      "caseId": "development-05",
+      "status": "succeeded",
+      "output": {
+        "findings": [
+          {
+            "id": "clarify",
+            "feedbackId": "feedback",
+            "requestSpan": "Change the accent color to green; Add a shopping cart.",
+            "label": "unclear",
+            "rationale": "This request is outside the exact scripted Atlas fixture. No model has assessed its scope coverage or separated its requested items.",
+            "citations": [
+              {
+                "sourceId": "feedback",
+                "version": 1,
+                "paragraphId": "p-1",
+                "quote": "Change the accent color to green; Add a shopping cart."
+              }
+            ],
+            "missingInformation": [
+              "Which individual changes are requested, and which approved provisions authorize each one?"
+            ],
+            "proposedAction": "Review the frozen evidence manually and draft a clarification if needed."
+          }
+        ]
+      },
+      "attempts": [
+        {
+          "modelMs": 0.020916999999997188,
+          "costUsd": 0,
+          "outcome": "succeeded"
+        }
+      ],
+      "queuedToCompleteMs": null,
+      "coldStart": null
+    },
+    {
+      "caseId": "development-06",
+      "status": "succeeded",
+      "output": {
+        "findings": [
+          {
+            "id": "clarify",
+            "feedbackId": "feedback",
+            "requestSpan": "Fix the reversed left and right words in the caption.",
+            "label": "unclear",
+            "rationale": "This request is outside the exact scripted Atlas fixture. No model has assessed its scope coverage or separated its requested items.",
+            "citations": [
+              {
+                "sourceId": "feedback",
+                "version": 1,
+                "paragraphId": "p-1",
+                "quote": "Fix the reversed left and right words in the caption."
+              }
+            ],
+            "missingInformation": [
+              "Which individual changes are requested, and which approved provisions authorize each one?"
+            ],
+            "proposedAction": "Review the frozen evidence manually and draft a clarification if needed."
+          }
+        ]
+      },
+      "attempts": [
+        {
+          "modelMs": 0.019166000000012673,
+          "costUsd": 0,
+          "outcome": "succeeded"
+        }
+      ],
+      "queuedToCompleteMs": null,
+      "coldStart": null
+    },
+    {
+      "caseId": "development-07",
+      "status": "succeeded",
+      "output": {
+        "findings": [
+          {
+            "id": "clarify",
+            "feedbackId": "feedback",
+            "requestSpan": "Show the confirmation screen after I submit the form.",
+            "label": "unclear",
+            "rationale": "This request is outside the exact scripted Atlas fixture. No model has assessed its scope coverage or separated its requested items.",
+            "citations": [
+              {
+                "sourceId": "feedback",
+                "version": 1,
+                "paragraphId": "p-1",
+                "quote": "Show the confirmation screen after I submit the form."
+              }
+            ],
+            "missingInformation": [
+              "Which individual changes are requested, and which approved provisions authorize each one?"
+            ],
+            "proposedAction": "Review the frozen evidence manually and draft a clarification if needed."
+          }
+        ]
+      },
+      "attempts": [
+        {
+          "modelMs": 0.020165999999989026,
+          "costUsd": 0,
+          "outcome": "succeeded"
+        }
+      ],
+      "queuedToCompleteMs": null,
+      "coldStart": null
+    },
+    {
+      "caseId": "development-08",
+      "status": "succeeded",
+      "output": {
+        "findings": [
+          {
+            "id": "clarify",
+            "feedbackId": "feedback",
+            "requestSpan": "Accept credit card payments.",
+            "label": "unclear",
+            "rationale": "This request is outside the exact scripted Atlas fixture. No model has assessed its scope coverage or separated its requested items.",
+            "citations": [
+              {
+                "sourceId": "feedback",
+                "version": 1,
+                "paragraphId": "p-1",
+                "quote": "Accept credit card payments."
+              }
+            ],
+            "missingInformation": [
+              "Which individual changes are requested, and which approved provisions authorize each one?"
+            ],
+            "proposedAction": "Review the frozen evidence manually and draft a clarification if needed."
+          }
+        ]
+      },
+      "attempts": [
+        {
+          "modelMs": 0.01870800000000372,
+          "costUsd": 0,
+          "outcome": "succeeded"
+        }
+      ],
+      "queuedToCompleteMs": null,
+      "coldStart": null
+    },
+    {
+      "caseId": "development-09",
+      "status": "succeeded",
+      "output": {
+        "findings": [
+          {
+            "id": "clarify",
+            "feedbackId": "feedback",
+            "requestSpan": "Let visitors upload their own photographs.",
+            "label": "unclear",
+            "rationale": "This request is outside the exact scripted Atlas fixture. No model has assessed its scope coverage or separated its requested items.",
+            "citations": [
+              {
+                "sourceId": "feedback",
+                "version": 1,
+                "paragraphId": "p-1",
+                "quote": "Let visitors upload their own photographs."
+              }
+            ],
+            "missingInformation": [
+              "Which individual changes are requested, and which approved provisions authorize each one?"
+            ],
+            "proposedAction": "Review the frozen evidence manually and draft a clarification if needed."
+          }
+        ]
+      },
+      "attempts": [
+        {
+          "modelMs": 0.038250000000005,
+          "costUsd": 0,
+          "outcome": "succeeded"
+        }
+      ],
+      "queuedToCompleteMs": null,
+      "coldStart": null
+    },
+    {
+      "caseId": "development-10",
+      "status": "succeeded",
+      "output": {
+        "findings": [
+          {
+            "id": "clarify",
+            "feedbackId": "feedback",
+            "requestSpan": "Schedule recurring campaigns.",
+            "label": "unclear",
+            "rationale": "This request is outside the exact scripted Atlas fixture. No model has assessed its scope coverage or separated its requested items.",
+            "citations": [
+              {
+                "sourceId": "feedback",
+                "version": 1,
+                "paragraphId": "p-1",
+                "quote": "Schedule recurring campaigns."
+              }
+            ],
+            "missingInformation": [
+              "Which individual changes are requested, and which approved provisions authorize each one?"
+            ],
+            "proposedAction": "Review the frozen evidence manually and draft a clarification if needed."
+          }
+        ]
+      },
+      "attempts": [
+        {
+          "modelMs": 0.046750000000002956,
+          "costUsd": 0,
+          "outcome": "succeeded"
+        }
+      ],
+      "queuedToCompleteMs": null,
+      "coldStart": null
+    },
+    {
+      "caseId": "development-11",
+      "status": "succeeded",
+      "output": {
+        "findings": [
+          {
+            "id": "clarify",
+            "feedbackId": "feedback",
+            "requestSpan": "Transfer stock between warehouses.",
+            "label": "unclear",
+            "rationale": "This request is outside the exact scripted Atlas fixture. No model has assessed its scope coverage or separated its requested items.",
+            "citations": [
+              {
+                "sourceId": "feedback",
+                "version": 1,
+                "paragraphId": "p-1",
+                "quote": "Transfer stock between warehouses."
+              }
+            ],
+            "missingInformation": [
+              "Which individual changes are requested, and which approved provisions authorize each one?"
+            ],
+            "proposedAction": "Review the frozen evidence manually and draft a clarification if needed."
+          }
+        ]
+      },
+      "attempts": [
+        {
+          "modelMs": 0.02154200000001083,
+          "costUsd": 0,
+          "outcome": "succeeded"
+        }
+      ],
+      "queuedToCompleteMs": null,
+      "coldStart": null
+    },
+    {
+      "caseId": "development-12",
+      "status": "succeeded",
+      "output": {
+        "findings": [
+          {
+            "id": "clarify",
+            "feedbackId": "feedback",
+            "requestSpan": "Translate the page into Spanish; Replace the headline with Welcome aboard.",
+            "label": "unclear",
+            "rationale": "This request is outside the exact scripted Atlas fixture. No model has assessed its scope coverage or separated its requested items.",
+            "citations": [
+              {
+                "sourceId": "feedback",
+                "version": 1,
+                "paragraphId": "p-1",
+                "quote": "Translate the page into Spanish; Replace the headline with Welcome aboard."
+              }
+            ],
+            "missingInformation": [
+              "Which individual changes are requested, and which approved provisions authorize each one?"
+            ],
+            "proposedAction": "Review the frozen evidence manually and draft a clarification if needed."
+          }
+        ]
+      },
+      "attempts": [
+        {
+          "modelMs": 0.012667000000021744,
+          "costUsd": 0,
+          "outcome": "succeeded"
+        }
+      ],
+      "queuedToCompleteMs": null,
+      "coldStart": null
+    },
+    {
+      "caseId": "development-13",
+      "status": "succeeded",
+      "output": {
+        "findings": [
+          {
+            "id": "clarify",
+            "feedbackId": "feedback",
+            "requestSpan": "Allow anonymous public responses.",
+            "label": "unclear",
+            "rationale": "This request is outside the exact scripted Atlas fixture. No model has assessed its scope coverage or separated its requested items.",
+            "citations": [
+              {
+                "sourceId": "feedback",
+                "version": 1,
+                "paragraphId": "p-1",
+                "quote": "Allow anonymous public responses."
+              }
+            ],
+            "missingInformation": [
+              "Which individual changes are requested, and which approved provisions authorize each one?"
+            ],
+            "proposedAction": "Review the frozen evidence manually and draft a clarification if needed."
+          }
+        ]
+      },
+      "attempts": [
+        {
+          "modelMs": 0.012167000000005146,
+          "costUsd": 0,
+          "outcome": "succeeded"
+        }
+      ],
+      "queuedToCompleteMs": null,
+      "coldStart": null
+    },
+    {
+      "caseId": "development-14",
+      "status": "succeeded",
+      "output": {
+        "findings": [
+          {
+            "id": "clarify",
+            "feedbackId": "feedback",
+            "requestSpan": "Track delivery vans live on the map.",
+            "label": "unclear",
+            "rationale": "This request is outside the exact scripted Atlas fixture. No model has assessed its scope coverage or separated its requested items.",
+            "citations": [
+              {
+                "sourceId": "feedback",
+                "version": 1,
+                "paragraphId": "p-1",
+                "quote": "Track delivery vans live on the map."
+              }
+            ],
+            "missingInformation": [
+              "Which individual changes are requested, and which approved provisions authorize each one?"
+            ],
+            "proposedAction": "Review the frozen evidence manually and draft a clarification if needed."
+          }
+        ]
+      },
+      "attempts": [
+        {
+          "modelMs": 0.012040999999982205,
+          "costUsd": 0,
+          "outcome": "succeeded"
+        }
+      ],
+      "queuedToCompleteMs": null,
+      "coldStart": null
+    },
+    {
+      "caseId": "development-15",
+      "status": "succeeded",
+      "output": {
+        "findings": [
+          {
+            "id": "clarify",
+            "feedbackId": "feedback",
+            "requestSpan": "Make the dashboard better.",
+            "label": "unclear",
+            "rationale": "This request is outside the exact scripted Atlas fixture. No model has assessed its scope coverage or separated its requested items.",
+            "citations": [
+              {
+                "sourceId": "feedback",
+                "version": 1,
+                "paragraphId": "p-1",
+                "quote": "Make the dashboard better."
+              }
+            ],
+            "missingInformation": [
+              "Which individual changes are requested, and which approved provisions authorize each one?"
+            ],
+            "proposedAction": "Review the frozen evidence manually and draft a clarification if needed."
+          }
+        ]
+      },
+      "attempts": [
+        {
+          "modelMs": 0.01037500000001046,
+          "costUsd": 0,
+          "outcome": "succeeded"
+        }
+      ],
+      "queuedToCompleteMs": null,
+      "coldStart": null
+    },
+    {
+      "caseId": "development-16",
+      "status": "succeeded",
+      "output": {
+        "findings": [
+          {
+            "id": "clarify",
+            "feedbackId": "feedback",
+            "requestSpan": "Move the sidebar below the content.",
+            "label": "unclear",
+            "rationale": "This request is outside the exact scripted Atlas fixture. No model has assessed its scope coverage or separated its requested items.",
+            "citations": [
+              {
+                "sourceId": "feedback",
+                "version": 1,
+                "paragraphId": "p-1",
+                "quote": "Move the sidebar below the content."
+              }
+            ],
+            "missingInformation": [
+              "Which individual changes are requested, and which approved provisions authorize each one?"
+            ],
+            "proposedAction": "Review the frozen evidence manually and draft a clarification if needed."
+          }
+        ]
+      },
+      "attempts": [
+        {
+          "modelMs": 0.010416000000020631,
+          "costUsd": 0,
+          "outcome": "succeeded"
+        }
+      ],
+      "queuedToCompleteMs": null,
+      "coldStart": null
+    },
+    {
+      "caseId": "development-17",
+      "status": "succeeded",
+      "output": {
+        "findings": [
+          {
+            "id": "clarify",
+            "feedbackId": "feedback",
+            "requestSpan": "Make search instant.",
+            "label": "unclear",
+            "rationale": "This request is outside the exact scripted Atlas fixture. No model has assessed its scope coverage or separated its requested items.",
+            "citations": [
+              {
+                "sourceId": "feedback",
+                "version": 1,
+                "paragraphId": "p-1",
+                "quote": "Make search instant."
+              }
+            ],
+            "missingInformation": [
+              "Which individual changes are requested, and which approved provisions authorize each one?"
+            ],
+            "proposedAction": "Review the frozen evidence manually and draft a clarification if needed."
+          }
+        ]
+      },
+      "attempts": [
+        {
+          "modelMs": 0.01474999999999227,
+          "costUsd": 0,
+          "outcome": "succeeded"
+        }
+      ],
+      "queuedToCompleteMs": null,
+      "coldStart": null
+    },
+    {
+      "caseId": "development-18",
+      "status": "succeeded",
+      "output": {
+        "findings": [
+          {
+            "id": "clarify",
+            "feedbackId": "feedback",
+            "requestSpan": "Export the report in the right format.",
+            "label": "unclear",
+            "rationale": "This request is outside the exact scripted Atlas fixture. No model has assessed its scope coverage or separated its requested items.",
+            "citations": [
+              {
+                "sourceId": "feedback",
+                "version": 1,
+                "paragraphId": "p-1",
+                "quote": "Export the report in the right format."
+              }
+            ],
+            "missingInformation": [
+              "Which individual changes are requested, and which approved provisions authorize each one?"
+            ],
+            "proposedAction": "Review the frozen evidence manually and draft a clarification if needed."
+          }
+        ]
+      },
+      "attempts": [
+        {
+          "modelMs": 0.013666999999998097,
+          "costUsd": 0,
+          "outcome": "succeeded"
+        }
+      ],
+      "queuedToCompleteMs": null,
+      "coldStart": null
+    },
+    {
+      "caseId": "development-19",
+      "status": "succeeded",
+      "output": {
+        "findings": [
+          {
+            "id": "clarify",
+            "feedbackId": "feedback",
+            "requestSpan": "Make profiles private.",
+            "label": "unclear",
+            "rationale": "This request is outside the exact scripted Atlas fixture. No model has assessed its scope coverage or separated its requested items.",
+            "citations": [
+              {
+                "sourceId": "feedback",
+                "version": 1,
+                "paragraphId": "p-1",
+                "quote": "Make profiles private."
+              }
+            ],
+            "missingInformation": [
+              "Which individual changes are requested, and which approved provisions authorize each one?"
+            ],
+            "proposedAction": "Review the frozen evidence manually and draft a clarification if needed."
+          }
+        ]
+      },
+      "attempts": [
+        {
+          "modelMs": 0.011874999999974989,
+          "costUsd": 0,
+          "outcome": "succeeded"
+        }
+      ],
+      "queuedToCompleteMs": null,
+      "coldStart": null
+    },
+    {
+      "caseId": "development-20",
+      "status": "succeeded",
+      "output": {
+        "findings": [
+          {
+            "id": "clarify",
+            "feedbackId": "feedback",
+            "requestSpan": "Show notifications sooner; Make unread notices stand out more.",
+            "label": "unclear",
+            "rationale": "This request is outside the exact scripted Atlas fixture. No model has assessed its scope coverage or separated its requested items.",
+            "citations": [
+              {
+                "sourceId": "feedback",
+                "version": 1,
+                "paragraphId": "p-1",
+                "quote": "Show notifications sooner; Make unread notices stand out more."
+              }
+            ],
+            "missingInformation": [
+              "Which individual changes are requested, and which approved provisions authorize each one?"
+            ],
+            "proposedAction": "Review the frozen evidence manually and draft a clarification if needed."
+          }
+        ]
+      },
+      "attempts": [
+        {
+          "modelMs": 0.013708000000008269,
+          "costUsd": 0,
+          "outcome": "succeeded"
+        }
+      ],
+      "queuedToCompleteMs": null,
+      "coldStart": null
+    }
+  ]
+}
