@@ -1,6 +1,35 @@
 # Accord
 
-A project workspace for agreeing scope, reviewing deliverables, and recording client decisions. The **local M1–M3 workflow** from the [MVP plan](docs/Accord-MVP-Plan.md) is implemented: versioned approvals, private attachments, manual revision tasks, change requests and asynchronous fixture analysis with human review. Ninety-two automated tests (52 TypeScript/HTTP and 40 Python) and TypeScript/build checks pass on Node 26.4.0. The separate cloud foundation has been deployed and its login/project/logout walkthrough passed on user-reported evidence. Versioned cloud briefs and client approvals are implemented and verified locally; the user reported UPDATE_COMPLETE for the existing AWS stack. The live brief/approval walkthrough remains pending, and live AI remains open. Fixture output is explicitly labeled and is not model-quality evidence.
+**A shared workspace where independent teams and their clients agree on scope,
+review work, and preserve every decision.**
+
+Accord turns briefs, deliverables, feedback, and change requests into versioned
+records. Clients approve the exact version they reviewed; project owners can
+trace later work back to the scope that authorized it.
+
+![A client reviewing an Accord change request](docs/evidence/m2-approved-change.png)
+
+## What Accord does
+
+- Keeps brief revisions and approved baselines separate, so new drafts never
+  overwrite an earlier agreement.
+- Gives clients explicit approve/reject controls for briefs and deliverables.
+- Converts approved changes and reviewed feedback into accountable revision
+  tasks without losing the original conversation.
+- Stores project files and draft deliverable attachments with role-based access.
+- Records mutations in a project history and applies idempotency safeguards to
+  repeated requests.
+- Offers a local fixture analysis workflow whose evidence and proposals remain
+  subject to human review.
+
+## Product boundaries
+
+The complete collaboration workflow runs locally for a single owner and invited
+clients. The cloud preview currently covers authentication, isolated project
+access, and versioned brief approvals. Files, deliverables, feedback, change
+requests, and analysis remain local. Analysis uses deterministic fixtures; it
+does not demonstrate live model quality. See the verification documents in
+`docs/` for detailed test and deployment evidence.
 
 ## Run locally
 
